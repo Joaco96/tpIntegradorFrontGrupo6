@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Preset CSS -->
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <title>TP Integrador Grupo NN</title>
+  </head>
+  <body>
+    <header>
+      <ul id="listado-nav">
+        <a href="index.html">
+          <li class="links-header"><span>GET</span></li>
+        </a>
+
+        <a href="get.html">
+          <li class="links-header"><span>Get : id</span></li>
+        </a>
+        <a href="post.html">
+          <li class="links-header"><span>POST</span></li>
+        </a>
+
+        <a href="put.html">
+          <li class="links-header"><span>PUT</span></li>
+        </a>
+        <a href="delete.html">
+          <li class="links-header"><span>DELETE</span></li>
+        </a>
+      </ul>
+
+      <hr />
+      <h1>Listado de estudiantes</h1>
+      <hr />
+
+      <main id="contenedor-get">
+        <div id="estudiantes-container">
+          <ul id="estudiantes-lista"></ul>
+        </div>
+      </main>
+
+      <script>
+        async function obtenerDatosProductos() {
+          try {
+            let respuesta = await fetch(
+              `https://zdcjnk76-3000.brs.devtunnels.ms/students`
+            );
+            if (!respuesta.ok) {
+              throw new Error("Error al obtener los estudiantes");
+            }
+            let datos = await respuesta.json();
+            return datos;
+          } catch (error) {
+            console.error("Error: ", error);
+          }
+        }
+
+        function mostrarProductos(array) {
+          let estudiantes = document.getElementById("estudiantes-lista");
+          estudiantes.innerHTML = "<p>Cargando estudiantes...</p>";
+          if (!array || array.length === 0) {
+            console.log("No hay estudiantes disponibles.");
+            return;
+          }
+          let htmlEstudiantes = "";
+          for (let i = 0; i < array.length; i++) {
+            htmlEstudiantes += `
+              <li class="li-listados estudiantes-listados">              
+                <p>Id: ${array[i].id}/ Nombre: ${array[i].name}</p>
+              </li>
+            `;
+          }
+          estudiantes.innerHTML = htmlEstudiantes;
+        }
+
+        async function main() {
+          let datos = await obtenerDatosProductos();
+          mostrarProductos(datos);
+        }
+
+        main();
+      </script>
+    </header>
+  </body>
+</html>

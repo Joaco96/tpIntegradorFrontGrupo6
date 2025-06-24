@@ -1,0 +1,20 @@
+/* /////////////
+    Estilos globales
+///////////// */
+h1 {
+    text-align: center;
+}
+
+
+/* /////////////
+    Header
+///////////// */
+
+#listado-nav {
+    display: flex;
+    justify-content: space-around;
+}
+
+#listado-nav li {
+    list-style-type: none;
+}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Preset CSS -->
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <title>TP Integrador Grupo NN</title>
+  </head>
+  <body>
+    <header>
+      <ul id="listado-nav">
+        <a href="index.html">
+          <li class="links-header"><span>GET</span></li>
+        </a>
+
+        <a href="get.html">
+          <li class="links-header"><span>Get : id</span></li>
+        </a>
+        <a href="post.html">
+          <li class="links-header"><span>POST</span></li>
+        </a>
+
+        <a href="put.html">
+          <li class="links-header"><span>PUT</span></li>
+        </a>
+        <a href="delete.html">
+          <li class="links-header"><span>DELETE</span></li>
+        </a>
+      </ul>
+
+      <hr />
+      <h1>Listado de estudiantes</h1>
+      <hr />
+
+      <main id="contenedor-get">
+        <div id="productos-container" class="crudForm-container">
+          <h2>Consultar estudiante</h2>
+          <form id="getStudent-form">
+            <label for="idStud">Id estudiante</label>
+            <input
+              type="number"
+              name="idStud"
+              id="idStud"
+              placeholder="Ingrese el id del estudiante"
+              required
+            />
+            <input type="submit" value="Consultar" />
+          </form>
+        </div>
+        <div id="getId-conainter">
+          <ul id="getId-list"></ul>
+        </div>
+      </main>
+
+      <script>
+        let getStudent_form = document.getElementById("getStudent-form");
+        let getId_lista = document.getElementById("getId-list");
+
+        getStudent_form.addEventListener("submit", async (e) => {
+          getId_lista.innerHTML = "<p>Cargando estudiante...</p>";
+          e.preventDefault();
+          let idStud = document.getElementById("idStud").value;
+          let datos = await obtenerDatosEstudiantesPorId(idStud);
+          mostrarEstudiantes(datos);
+        });
+
+        async function obtenerDatosEstudiantesPorId(id) {
+          try {
+            let respuesta = await fetch(
+              `https://zdcjnk76-3000.brs.devtunnels.ms/students${
+                id ? `/${id}` : ""
+              }`
+            );
+            if (!respuesta.ok) {
+              console.error("Error al obtener el estudiante");
+            }
+            let datos = await respuesta.json();
+            return datos;
+          } catch (error) {
+            console.error("Error: ", error);
+          }
+        }
+
+        function mostrarEstudiantes(estudiante) {
+          if (!estudiante) {
+            console.log("No hay productos disponibles.");
+            return;
+          }
+          let htmlEstudiantes = "";
+
+          htmlEstudiantes += `
+              <li class="li-listados estudiantes-listados">              
+                <p>Id: ${estudiante.id}/ Nombre: ${estudiante.name}</p>
+              </li>
+            `;
+          getId_lista.innerHTML = htmlEstudiantes;
+        }
+      </script>
+    </header>
+  </body>
+</html>
