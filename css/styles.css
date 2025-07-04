@@ -2,7 +2,7 @@
     Estilos globales
 ///////////// */
 h1 {
-    text-align: center;
+  text-align: center;
 }
 
 h1,
@@ -13,7 +13,27 @@ h5,
 h6,
 p {
   margin: 0 !important;
+}
+
+h5 {
   line-height: 1;
+}
+
+body > main {
+  padding: 0;
+}
+
+body > main,
+body > .titleContainer,
+body > footer {
+  grid-column: 1 / -1;
+  width: 100%;
+}
+
+ul {
+  margin: 0;
+  width: 100%;
+  padding: 0;
 }
 
 /* /////////////
@@ -51,12 +71,7 @@ p {
 }
 
 .titleContainer button,
-.cardProductos button,
-.ventaCardContainer button {
-  margin: 0;
-}
-
-#getProduct-form input {
+.cardProductos button {
   margin: 0;
 }
 
@@ -115,7 +130,6 @@ body > header {
   align-items: center;
 }
 
-
 /* Card producto */
 .productosContainer {
   display: grid;
@@ -141,12 +155,6 @@ body > header {
   overflow: hidden;
 }
 
-.cardGetProductosImgContainer {
-  height: 200px;
-  width: 300px;
-  overflow: hidden;
-}
-
 .cardProductosImg {
   width: 100%;
   height: 100%;
@@ -161,6 +169,7 @@ body > header {
   flex-grow: 1;
   padding-left: 16px;
   height: 100%;
+  gap: 8px;
 }
 
 .cardProductosButtons {
@@ -171,4 +180,78 @@ body > header {
   justify-content: end;
   align-items: center;
   gap: 8px;
+}
+
+.footer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 18px 0px;
+  gap: 32px;
+}
+
+@media (max-width: 1440px) {
+  .productosContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .productosContainer {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .cardProductos {
+    width: 100%;
+  }
+
+  .cardProductosImgContainer {
+    height: 200px;
+    width: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  #listadoNav {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .cardProductos {
+    flex-direction: column;
+  }
+
+  .cardProductosImgContainer {
+    height: 160px;
+    width: 100%;
+  }
+
+  .cardProductosImg {
+    height: 100%;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .cardProductosInfo {
+    width: 100%;
+    padding: 16px;
+  }
+
+  .cardProductosButtons {
+    padding-right: 0px;
+  }
+
+  .titleContainer {
+    gap: 16px;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  h2 {
+    font-size: 28px !important;
+  }
+  .linksContainer {
+    gap: 36px;
+  }
 }
