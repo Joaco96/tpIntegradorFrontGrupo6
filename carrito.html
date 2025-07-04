@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.css" />
+    <link rel="icon" type="image/jpg" href="css/img/favicon.ico" />
+    <title>Carrito - Tech Shop</title>
+  </head>
+  <body>
+    <header>
+      <ul id="listadoNav">
+        <a href="/" class="logoContainer">
+          <img src="css/img/logo.png" alt="" class="favicon" />
+          <h5>Cliente</h5>
+        </a>
+        <div class="linksContainer">
+          <a href="/carrito.html">
+            <li class="links-header"><span>Carrito</span></li>
+          </a>
+        </div>
+      </ul>
+    </header>
+    <hr />
+    <h1>Carrito</h1>
+    <hr />
+
+    <!-- <main id="contenedor-get">
+      <div id="productos-container" class="crudForm-container">
+        <h2>Ingresar datos nuevo estudiante</h2>
+        <form id="getStudent-form">
+          <label for="idStud">Id estudiante</label>
+          <input
+            type="number"
+            name="idStud"
+            id="idStud"
+            placeholder="Ingrese el id del estudiante"
+            required
+          />
+          <label for="nameStud">Nombre estudiante</label>
+          <input
+            type="text"
+            name="nameStud"
+            id="nameStud"
+            placeholder="Ingrese el nombre del estudiante"
+            required
+          />
+          <input type="submit" value="Crear" />
+        </form>
+      </div>
+    </main> -->
+
+    <script>
+      let getStudent_form = document.getElementById("getStudent-form");
+      let getId_lista = document.getElementById("getId-list");
+
+      getStudent_form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        let idStud = document.getElementById("idStud").value;
+        let nameStud = document.getElementById("nameStud").value;
+        let datos = await enviarDatosEstudiante(idStud, nameStud);
+      });
+
+      async function enviarDatosEstudiante(id, name) {
+        try {
+          let respuesta = await fetch(`http://localhost:3000/api/students`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              id: id,
+              name: name,
+            }),
+          });
+          if (!respuesta.ok) {
+            throw new Error("Error al enviar nuevo estudiante");
+          }
+          let datos = await respuesta.json();
+          return datos;
+        } catch (error) {
+          console.error("Error: ", error);
+        }
+      }
+    </script>
+  </body>
+</html>

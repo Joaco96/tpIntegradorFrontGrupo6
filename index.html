@@ -3,84 +3,91 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Preset CSS -->
-    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.css" />
     <link rel="stylesheet" href="css/styles.css" />
-    <title>TP Integrador Grupo NN</title>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.css" />
+    <link rel="icon" type="image/jpg" href="css/img/favicon.ico" />
+    <title>Cliente - Tech Shop</title>
   </head>
   <body>
     <header>
-      <ul id="listado-nav">
-        <a href="index.html">
-          <li class="links-header"><span>GET</span></li>
+      <ul id="listadoNav">
+        <a href="/" class="logoContainer">
+          <img src="css/img/logo.png" alt="" class="favicon" />
+          <h5>Cliente</h5>
         </a>
-
-        <a href="get.html">
-          <li class="links-header"><span>Get : id</span></li>
-        </a>
-        <a href="post.html">
-          <li class="links-header"><span>POST</span></li>
-        </a>
-
-        <a href="put.html">
-          <li class="links-header"><span>PUT</span></li>
-        </a>
-        <a href="delete.html">
-          <li class="links-header"><span>DELETE</span></li>
-        </a>
-      </ul>
-
-      <hr />
-      <h1>Listado de estudiantes</h1>
-      <hr />
-
-      <main id="contenedor-get">
-        <div id="estudiantes-container">
-          <ul id="estudiantes-lista"></ul>
+        <div class="linksContainer">
+          <a href="/carrito.html">
+            <li class="links-header"><span>Carrito</span></li>
+          </a>
         </div>
-      </main>
-
-      <script>
-        async function obtenerDatosProductos() {
-          try {
-            let respuesta = await fetch(
-              `https://zdcjnk76-3000.brs.devtunnels.ms/students`
-            );
-            if (!respuesta.ok) {
-              throw new Error("Error al obtener los estudiantes");
-            }
-            let datos = await respuesta.json();
-            return datos;
-          } catch (error) {
-            console.error("Error: ", error);
+      </ul>
+    </header>
+    <hr />
+    <h1>Productos disponibles</h1>
+    <hr />
+    <main id="contenedor-get">
+      <div id="estudiantes-container">
+        <ul id="estudiantes-lista"></ul>
+      </div>
+    </main>
+    <script>
+      async function obtenerDatosProductos() {
+        try {
+          let respuesta = await fetch(`http://localhost:3000/api/products`);
+          if (!respuesta.ok) {
+            throw new Error("Error al obtener los estudiantes");
           }
+          let datos = await respuesta.json();
+          return datos;
+        } catch (error) {
+          console.error("Error: ", error);
         }
+      }
 
-        function mostrarProductos(array) {
-          let estudiantes = document.getElementById("estudiantes-lista");
-          estudiantes.innerHTML = "<p>Cargando estudiantes...</p>";
-          if (!array || array.length === 0) {
-            console.log("No hay estudiantes disponibles.");
-            return;
-          }
-          let htmlEstudiantes = "";
-          for (let i = 0; i < array.length; i++) {
+      function mostrarProductos(productos) {
+        let productosLista = document.getElementById("estudiantes-lista");
+        productosLista.innerHTML = "<p>Cargando estudiantes...</p>";
+        if (!productos || productos.length === 0) {
+          console.log("No hay estudiantes disponibles.");
+          return;
+        }
+        let htmlEstudiantes = "";
+        productos.forEach((producto) => {
+          if (producto.is_active) {
             htmlEstudiantes += `
-              <li class="li-listados estudiantes-listados">              
-                <p>Id: ${array[i].id}/ Nombre: ${array[i].name}</p>
+              <li class="cardProductos">
+                <div class="cardGetProductosImgContainer">
+                  <img src=${producto.image} alt=${
+                        producto.name
+                      } class="cardProductosImg">
+                </div>
+                <div class="cardProductosInfo">
+                  <p>
+                    Id: ${producto.id}
+                  </p>
+                  <h4>
+                    ${producto.name}
+                  </h4>
+                  <h6>
+                    $${producto.price}
+                  </h6>
+                  <div class="cardProductosButtons">
+                    <button data-id="${producto.id}">Agregar al carrito</button>
+                  </div>
+                </div>
               </li>
             `;
           }
-          estudiantes.innerHTML = htmlEstudiantes;
-        }
+        });
+        productosLista.innerHTML = htmlEstudiantes;
+      }
 
-        async function main() {
-          let datos = await obtenerDatosProductos();
-          mostrarProductos(datos);
-        }
+      async function main() {
+        let datos = await obtenerDatosProductos();
+        mostrarProductos(datos);
+      }
 
-        main();
-      </script>
-    </header>
+      main();
+    </script>
   </body>
 </html>
