@@ -129,6 +129,7 @@ const guardarCompra = async () => {
   console.log(body);
   const data = await realizarCompra(body);
   if (data) {
+    alert("Compra realizada con éxito");
     imprimirTicket(data);
     sessionStorage.clear();
     window.location.href = "/login.html";
@@ -149,7 +150,6 @@ botonConfirmarCompra.addEventListener("click", async function (event) {
 const botonVaciarCarrito = document.getElementById("vaciar-carrito");
 
 botonVaciarCarrito.addEventListener("click", function () {
-  console.log("Carrito vaciado");
   guardarProductosCarritoSessionStorage([]);
   carrito = [];
   mostrarCarrito(carrito);
