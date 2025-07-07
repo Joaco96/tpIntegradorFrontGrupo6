@@ -179,25 +179,42 @@ body > header {
   object-fit: cover;
   object-position: center;
   border-radius: 8px 0 0 8px;
+  opacity: 1;
 }
 
 .cardProductosInfo {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  padding-left: 16px;
+  padding-inline: 16px;
   height: 100%;
   gap: 8px;
 }
 
+.cardProductosId, .cardProductosName{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .cardProductosButtons {
-  padding-right: 16px;
   padding-top: 8px;
   display: flex;
   flex-direction: row;
   justify-content: end;
   align-items: center;
   gap: 8px;
+}
+
+.cantidad{
+  border: 1px solid #fff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background-color: #212121;
+}
+
+.subtotal{
+  font-size: large;
 }
 
 .footer {
@@ -262,6 +279,12 @@ div.login {
   padding: 8px 16px;
   border-radius: 8px;
   cursor: pointer;
+}
+
+.buttons-container{
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 @media (max-width: 1440px) {

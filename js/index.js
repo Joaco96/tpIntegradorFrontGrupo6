@@ -12,6 +12,10 @@ function recuperarProductosCarritoSessionStorage() {
 }
 
 let productos;
+let filtros = {
+  teclados: false,
+  mouses: false
+};
 let carrito = recuperarProductosCarritoSessionStorage() ?? [];
 
 async function obtenerDatosProductos() {
@@ -74,6 +78,25 @@ function mostrarProductos(productos) {
   productosLista.innerHTML = htmlProductos;
 }
 
+function aplicarFiltros() {
+  let productosFiltrados = productos;
+  const { teclados, mouses } = filtros;
+
+  // Si se activa algún filtro, filtramos por categoría
+  if (teclados || mouses) {
+    productosFiltrados = productosFiltrados.filter((prod) => {
+      const categoria = prod.category?.toLowerCase();
+      return (
+        (teclados && categoria === "teclados") ||
+        (mouses && categoria === "mouses")
+      );
+    });
+  }
+  console.log(productosFiltrados);
+  console.log(filtros);
+  mostrarProductos(productosFiltrados);
+}
+
 function agregarCarrito(id) {
   const productoAgregar = productos.find((producto) => producto.id === id);
   productoAgregar.cantidad = productoAgregar.cantidad
@@ -84,6 +107,33 @@ function agregarCarrito(id) {
   mostrarProductos(productos);
   guardarProductosCarritoSessionStorage(carrito);
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const botonesCategoria = document.querySelectorAll(".categoryFilterButton");
+
+  botonesCategoria.forEach((boton) => {
+    boton.addEventListener("click", (e) => {
+      const texto = e.target.textContent.toLowerCase();
+      const yaActivo = e.target.classList.contains("active");
+
+      // Reiniciamos filtros y clases
+      filtros = {
+        teclados: false,
+        mouses: false
+      };
+      botonesCategoria.forEach((b) => b.classList.remove("active"));
+
+      // Si no estaba activo, lo activamos
+      if (!yaActivo) {
+        if (texto === "teclados") filtros.teclados = true;
+        if (texto === "mouses") filtros.mouses = true;
+        e.target.classList.add("active");
+      }
+
+      aplicarFiltros();
+    });
+  });
+});
 
 async function main() {
   const loginData = sessionStorage.getItem("buyerName");
