@@ -130,9 +130,16 @@ const guardarCompra = async () => {
   const data = await realizarCompra(body);
   if (data) {
     alert("Compra realizada con éxito");
+    vaciarCarrito(data);
     imprimirTicket(data.id);
   }
 };
+
+const vaciarCarrito = () => {
+  guardarProductosCarritoSessionStorage([]);
+  carrito = [];
+  mostrarCarrito(carrito);
+}
 
 const botonConfirmarCompra = document.getElementById("botonConfirmarCompra");
 
@@ -148,9 +155,7 @@ botonConfirmarCompra.addEventListener("click", async function (event) {
 const botonVaciarCarrito = document.getElementById("vaciar-carrito");
 
 botonVaciarCarrito.addEventListener("click", function () {
-  guardarProductosCarritoSessionStorage([]);
-  carrito = [];
-  mostrarCarrito(carrito);
+  vaciarCarrito();
 });
 
 function main() {
