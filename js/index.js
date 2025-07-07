@@ -92,8 +92,6 @@ function aplicarFiltros() {
       );
     });
   }
-  console.log(productosFiltrados);
-  console.log(filtros);
   mostrarProductos(productosFiltrados);
 }
 
