@@ -104,7 +104,7 @@ function agregarCarrito(id) {
     : 1;
   const productoEnCarrito = carrito.find((producto) => producto.id === id);
   if (!productoEnCarrito) carrito.push(productoAgregar);
-  mostrarProductos(productos);
+  aplicarFiltros();
   guardarProductosCarritoSessionStorage(carrito);
 }
 
