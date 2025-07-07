@@ -106,14 +106,14 @@ async function realizarCompra(body) {
   }
 }
 
-function imprimirTicket() {
-  console.log("Imprimiendo ticket");
+function imprimirTicket(id) {
+  window.location.href = `/ticket.html?id=${id}`;
 }
 
 const guardarCompra = async () => {
   if (!carrito.length) return alert("Carrito sin productos");
   const buyerName = sessionStorage.getItem("buyerName");
-  console.log(buyerName);
+
   const body = {
     buyerName: JSON.parse(buyerName),
     total: calcularTotal(carrito),
@@ -126,13 +126,11 @@ const guardarCompra = async () => {
       };
     }),
   };
-  console.log(body);
+
   const data = await realizarCompra(body);
   if (data) {
     alert("Compra realizada con éxito");
-    imprimirTicket(data);
-    sessionStorage.clear();
-    window.location.href = "/login.html";
+    imprimirTicket(data.id);
   }
 };
 
