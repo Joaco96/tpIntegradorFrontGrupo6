@@ -287,6 +287,24 @@ div.login {
   gap: 20px;
 }
 
+.categoryFilterButton {
+  background-color: #212121;
+  color: #ffb300;
+  border: 1px solid #ffb300;
+  cursor: pointer;
+}
+
+.categoryFilterButton:hover {
+  background-color: #e6e6e6;
+  color: #333;
+}
+
+.categoryFilterButton.active {
+  background-color: #ffb300;
+  color: #333;
+  border-color: #ffb300;
+}
+
 @media (max-width: 1440px) {
   .productosContainer {
     grid-template-columns: repeat(2, 1fr);
