@@ -88,6 +88,9 @@ function agregarCarrito(id) {
 async function main() {
   const loginData = sessionStorage.getItem("buyerName");
   if(!loginData) return window.location.href = "/login.html";
+  
+  let userNameContainer = document.querySelector("#userName");
+  userNameContainer.innerHTML = JSON.parse(loginData);
 
   let productosLista = document.querySelector(".productosContainer");
   productosLista.innerHTML = "<p>Cargando productos...</p>";

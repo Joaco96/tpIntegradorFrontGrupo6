@@ -158,6 +158,10 @@ botonVaciarCarrito.addEventListener("click", function () {
 function main() {
   const loginData = sessionStorage.getItem("buyerName");
   if (!loginData) return (window.location.href = "/login.html");
+
+  let userNameContainer = document.querySelector("#userName");
+  userNameContainer.innerHTML = JSON.parse(loginData);
+
   mostrarCarrito(carrito);
 }
 
