@@ -20,28 +20,35 @@ function mostrarCarrito(array) {
     htmlCarrito += `
               <li class="cardProductos">
                 <div class="cardProductosImgContainer">
-                  <img src=${array[i].image} alt=${
-      array[i].name
-    } class="cardProductosImg">
+                  <img src=${array[i].image} alt=${array[i].name} class="cardProductosImg">
                 </div>
                 <div class="cardProductosInfo">
-                  <p>
-                    Id: ${array[i].id}
-                  </p>
-                  <h4>
-                    ${array[i].name}
-                  </h4>
-                  <h6>
-                    Subtotal $${array[i].price * array[i].cantidad}
-                  </h6>
-                  <div class="cardProductosButtons">
-                    <div class="buttons-container">
-                    <button onClick="${`eliminarCarrito(${array[i].id})`}">-</button>
-                    <span>${array[i].cantidad}</span>
-                    <button onClick="${`agregarCarrito(${array[i].id})`}">+</button>
-                    </div>
-                    
+                  <div class="cardProductosId">
+                    <p>
+                      Id: ${array[i].id}
+                    </p>
+                                        
                   </div>
+                  <div class="cardProductosName">
+                    <h4>
+                      ${array[i].name}
+                    </h4>
+                    <h6>
+                      $${array[i].price}
+                    </h6>                    
+                  </div>
+                  <div class="cardProductosName">
+                    <div class="cardProductosButtons">
+                      <div class="buttons-container">
+                        <button onClick="${`eliminarCarrito(${array[i].id})`}">-</button>
+                        <span class="cantidad"> ${array[i].cantidad}</span>
+                        <button onClick="${`agregarCarrito(${array[i].id})`}">+</button>
+                      </div>                    
+                    </div>
+                    <h6 class="subtotal">
+                      Subtotal $${array[i].price * array[i].cantidad}
+                    </h6>
+                    </div>
                 </div>
               </li>
             `;
