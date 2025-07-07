@@ -140,6 +140,24 @@ body > header {
   align-items: center;
 }
 
+.carritoContainer {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 28px;
+  padding: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.total-carrito {
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  color: #ffb300;
+  font-weight: bold;
+}
+
 .cardProductos {
   display: flex;
   align-items: center;
@@ -189,6 +207,23 @@ body > header {
   justify-content: center;
   padding: 18px 0px;
   gap: 32px;
+}
+
+div.login {
+  flex-direction: column;
+  gap: 32px;
+  min-height: 49dvh;
+  justify-content: flex-start;
+}
+
+.loginFormContainer {
+  width: 100%;
+  max-width: 400px;
+}
+
+.loginFormContainer input {
+  width: 100%;
+  max-width: 400px;
 }
 
 @media (max-width: 1440px) {

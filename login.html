@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="https://cdn.simplecss.org/simple.css" />
-    <script src="./js/carrito.js" defer></script>
+    <script src="./js/login.js" defer></script>
     <link rel="icon" type="image/jpg" href="css/img/favicon.ico" />
-    <title>Carrito Cliente - Tech Shop</title>
+    <title>Login Cliente - Tech Shop</title>
   </head>
   <body>
     <header>
@@ -16,26 +16,22 @@
           <img src="css/img/logo.png" alt="" class="favicon" />
           <h5>Cliente</h5>
         </a>
-        <div class="linksContainer">
-          <span><span id="contador-carrito">0</span> productos</span>
-        </div>
       </ul>
     </header>
-    <div class="titleContainer">
-      <h2 class="title">Carrito</h2>
-      <div class="titleButtonsContainer">
-        <a href="/index.html">
-          <button>Volver</button>
-        </a>
-      </div>
-    </div>
     <main>
-      <ul class="carritoContainer"></ul>
-      <div class="total-carrito">
-        <p>Total: <span id="precio-total">$0.00</span></p>
-      </div>
-      <div class="total-carrito">
-        <button id="botonConfirmarCompra">Confirmar Compra</button>
+      <div class="titleContainer login">
+        <h2 class="title">Ingresar Nombre</h2>
+        <form class="loginFormContainer" id="loginForm">
+          <label for="name">Nombre del Cliente</label>
+          <input
+            type="text"
+            name="name"
+            id="nameInput"
+            placeholder="Ingrese el nombre del Cliente"
+            required
+          />
+          <button type="submit">Ingresar</button>
+        </form>
       </div>
     </main>
     <footer>

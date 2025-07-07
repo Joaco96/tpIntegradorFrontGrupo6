@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="https://cdn.simplecss.org/simple.css" />
+    <script src="./js/index.js" defer></script>
     <link rel="icon" type="image/jpg" href="css/img/favicon.ico" />
-    <title>Cliente - Tech Shop</title>
+    <title>Tienda Cliente - Tech Shop</title>
   </head>
   <body>
     <header>
@@ -28,63 +29,6 @@
     <main>
       <ul class="productosContainer"></ul>
     </main>
-    <script>
-      async function obtenerDatosProductos() {
-        try {
-          let respuesta = await fetch(`http://localhost:3000/api/products`);
-          if (!respuesta.ok) {
-            throw new Error("Error al obtener los estudiantes");
-          }
-          let datos = await respuesta.json();
-          return datos;
-        } catch (error) {
-          console.error("Error: ", error);
-        }
-      }
-
-      function mostrarProductos(productos) {
-        let productosLista = document.querySelector(".productosContainer");
-        productosLista.innerHTML = "<p>Cargando productos...</p>";
-        if (!productos || productos.length === 0) {
-          console.log("No hay estudiantes disponibles.");
-          return;
-        }
-        let htmlEstudiantes = "";
-        productos.forEach((producto) => {
-          if (producto.is_active) {
-            htmlEstudiantes += `
-              <li class="cardProductos">
-                <div class="cardProductosImgContainer">
-                  <img src=${producto.image} alt=${producto.name} class="cardProductosImg">
-                </div>
-                <div class="cardProductosInfo">
-                  <p>
-                    Id: ${producto.id}
-                  </p>
-                  <h4>
-                    ${producto.name}
-                  </h4>
-                  <h6>
-                    $${producto.price}
-                  </h6>
-                  <div class="cardProductosButtons">
-                    <button data-id="${producto.id}">Agregar al carrito</button>
-                  </div>
-                </div>
-              </li>
-            `;
-          }
-        });
-        productosLista.innerHTML = htmlEstudiantes;
-      }
-
-      async function main() {
-        let datos = await obtenerDatosProductos();
-        mostrarProductos(datos);
-      }
-
-      main();
-    </script>
     <footer>
       <h5>Alumnos</h5>
       <div class="footer">
