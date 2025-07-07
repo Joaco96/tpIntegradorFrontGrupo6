@@ -262,6 +262,10 @@ div.login {
   cursor: pointer;
 }
 
+.ticketsButtonsContainer {
+  padding-inline: 20px;
+}
+
 .totalVenta{
   width: 100%;
   text-align: end;
