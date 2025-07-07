@@ -12,8 +12,8 @@ function mostrarProductosTicket(venta) {
     htmlItems += `<div class="itemsContainer">
         <p class="">- ${item.productName}</p>
         <p class=""> ${item.quantity} un.</p>
-        <p class=""> $ ${item.productPrice} </p>
-        <p class=""> $ ${item.quantity * item.productPrice} </p>
+        <p class=""> $ ${item.productPrice} x un. </p>
+        <p class="">Subtotal $ ${item.quantity * item.productPrice} </p>
       </div>`;
   });
   itemsContainer.innerHTML = htmlItems;
