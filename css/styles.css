@@ -233,6 +233,35 @@ div.login {
   justify-content: flex-start;
 }
 
+.detailContainer{
+  padding-inline: 20px;
+  padding-top: 40px;
+  min-height: 49dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.ventaItemContainer {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.itemsContainer {
+  border-bottom: 1px solid #fff;
+  padding-block: 20px;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.totalVenta{
+  width: 100%;
+  text-align: end;
+  padding-top: 20px;
+  color: #FFB300;
+}
+
 .loginFormContainer {
   width: 100%;
   max-width: 400px;
@@ -280,6 +309,10 @@ div.login {
 }
 
 @media (max-width: 768px) {
+  .itemsContainer {
+    flex-direction: column;
+  }
+
   #listadoNav {
     flex-direction: column;
     gap: 16px;
