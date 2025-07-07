@@ -10,10 +10,10 @@ function mostrarProductosTicket(venta) {
   let htmlItems = "";
   venta.items.forEach((item) => {
     htmlItems += `<div class="itemsContainer">
-        <p class="">- ${item.productName}</p>
-        <p class=""> ${item.quantity} un.</p>
-        <p class=""> $ ${item.productPrice} x un. </p>
-        <p class="">Subtotal $ ${item.quantity * item.productPrice} </p>
+        <span>- ${item.productName}</span>
+        <span> ${item.quantity} un.</span>
+        <span> $ ${item.productPrice} x un. </span>
+        <span>Subtotal $${item.quantity * item.productPrice} </span>
       </div>`;
   });
   itemsContainer.innerHTML = htmlItems;
