@@ -28,7 +28,6 @@ async function obtenerDatosVenta(id) {
       throw new Error("Error al obtener los productos de la venta");
     }
     let datos = await respuesta.json();
-    console.log(datos);
     return datos;
   } catch (error) {
     console.error("Error: ", error);
