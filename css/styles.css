@@ -255,6 +255,13 @@ div.login {
   justify-content: space-between;
 }
 
+.downloadTicketButton {
+  background-color: #212121;
+  color: #ffb300;
+  border: 1px solid #ffb300;
+  cursor: pointer;
+}
+
 .totalVenta{
   width: 100%;
   text-align: end;
@@ -329,6 +336,10 @@ div.login {
 @media (max-width: 768px) {
   .itemsContainer {
     flex-direction: column;
+  }
+
+  .detailContainer{
+    padding-top: 20px;
   }
 
   #listadoNav {
