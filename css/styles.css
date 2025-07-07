@@ -226,6 +226,15 @@ div.login {
   max-width: 400px;
 }
 
+#vaciar-carrito{
+  background-color: #212121;
+  color: #ffb300;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
 @media (max-width: 1440px) {
   .productosContainer {
     grid-template-columns: repeat(2, 1fr);

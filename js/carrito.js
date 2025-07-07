@@ -111,7 +111,7 @@ function imprimirTicket() {
 }
 
 const guardarCompra = async () => {
-  if(!carrito.length) return alert("Carrito sin productos")
+  if (!carrito.length) return alert("Carrito sin productos");
   const buyerName = sessionStorage.getItem("buyerName");
   console.log(buyerName);
   const body = {
@@ -144,6 +144,15 @@ botonConfirmarCompra.addEventListener("click", async function (event) {
   await guardarCompra();
   botonConfirmarCompra.disabled = false;
   botonConfirmarCompra.textContent = "Confirmar Compra";
+});
+
+const botonVaciarCarrito = document.getElementById("vaciar-carrito");
+
+botonVaciarCarrito.addEventListener("click", function () {
+  console.log("Carrito vaciado");
+  guardarProductosCarritoSessionStorage([]);
+  carrito = [];
+  mostrarCarrito(carrito);
 });
 
 function main() {
