@@ -149,7 +149,7 @@ body > header {
   align-items: center;
 }
 
-.total-carrito {
+.totalCarrito {
   padding: 20px;
   width: 100%;
   display: flex;
@@ -264,6 +264,9 @@ div.login {
 
 .ticketsButtonsContainer {
   padding-inline: 20px;
+  display: flex;
+  gap: 16px;
+  justify-content: end;
 }
 
 .totalVenta{
@@ -305,9 +308,11 @@ div.login {
   cursor: pointer;
 }
 
-.categoryFilterButton:hover {
-  background-color: #e6e6e6;
+.categoryFilterButton:enabled:hover {
+  background-color: #ffb300;
   color: #333;
+  border-color: #ffb300;
+  cursor: pointer;
 }
 
 .categoryFilterButton.active {
