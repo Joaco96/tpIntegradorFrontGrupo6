@@ -90,7 +90,7 @@ function eliminarCarrito(id) {
 }
 
 function mostrarTotalesCarrito(array) {
-  let contenedorTotalCarrito = document.querySelector("#precio-total");
+  let contenedorTotalCarrito = document.querySelector("#precioTotal");
   let contadorCarrito = document.getElementById("contador-carrito");
   let totalCarrito = calcularTotal(array);
   contenedorTotalCarrito.innerHTML = `$ ${formatearNumero(totalCarrito)}`;
@@ -173,7 +173,7 @@ botonConfirmarCompra.addEventListener("click", async function (event) {
   botonConfirmarCompra.textContent = "Confirmar Compra";
 });
 
-const botonVaciarCarrito = document.getElementById("vaciar-carrito");
+const botonVaciarCarrito = document.getElementById("vaciarCarrito");
 
 botonVaciarCarrito.addEventListener("click", function () {
   vaciarCarrito();
