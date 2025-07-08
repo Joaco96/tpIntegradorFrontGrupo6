@@ -1,3 +1,5 @@
+let venta = null;
+
 function mostrarProductosTicket(venta) {
   let itemsContainer = document.querySelector(".ventaItemContainer");
   let totalContainer = document.querySelector(".totalVenta");
@@ -39,6 +41,57 @@ function obtenerIdDeURL() {
   return params.get("id");
 }
 
+async function exportarPedidoPDF(pedido) {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  const margenIzq = 15;
+  const margenDer = 195;
+  let y = 20;
+
+  doc.setFontSize(12);
+
+  doc.setFontSize(20);
+  doc.text(`Orden N°${pedido.id}`, margenDer - 40, y + 10, { align: "left" });
+
+  y += 15;
+
+  pedido.items.forEach((item) => {
+    y += 10;
+    doc.setFontSize(11);
+    doc.text(
+      `${item.quantity} x ${item.productName} - $${item.productPrice.toFixed(2)}`,
+      margenIzq,
+      y - 2
+    );
+  });
+
+  y += 10;
+
+  doc.setFontSize(12);
+  doc.text("TOTAL", margenIzq, y);
+  doc.line(margenIzq + 20, y + 2, margenDer, y + 2);
+  doc.text(`$${pedido.total.toFixed(2)}`, margenDer, y, { align: "right" });
+
+  doc.setFontSize(10);
+  doc.setTextColor(255, 0, 0);
+  doc.text("Alumnos: Cortes Santiago, Cortes Joaquin", margenIzq, 280);
+
+  doc.save(`pedido-${pedido.id}.pdf`);
+}
+
+const downloadTicketButton = document.querySelector(".downloadTicketButton");
+
+downloadTicketButton.addEventListener("click", async function (event) {
+  event.preventDefault();
+  downloadTicketButton.disabled = true;
+  downloadTicketButton.textContent = "Descargando...";
+  await exportarPedidoPDF(venta);
+  downloadTicketButton.disabled = false;
+  downloadTicketButton.textContent = "Descargar comprobante";
+});
+
+
 async function main() {
   const loginData = sessionStorage.getItem("buyerName");
   if (!loginData) return (window.location.href = "/login.html");
@@ -50,8 +103,7 @@ async function main() {
   itemsContainer.innerHTML = "<p>Cargando productos de ticket...</p>";
 
   const id = obtenerIdDeURL();
-  const venta = await obtenerDatosVenta(id);
-
+  venta = await obtenerDatosVenta(id);
   mostrarProductosTicket(venta);
 }
 
