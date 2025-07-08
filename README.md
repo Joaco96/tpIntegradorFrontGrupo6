@@ -1,6 +1,6 @@
 # 📌 Estructura y Arquitectura del Proyecto
 
-Este documento describe la estructura del proyecto y las tecnologías utilizadas.
+Este documento describe la estructura del proyecto y las tecnologías utilizadas. 
 
 ## 🛠️ Tecnologías Utilizadas
 - **Frontend:** Javascript, HTML, CSS
