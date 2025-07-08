@@ -16,6 +16,7 @@ let carrito = recuperarProductosCarritoSessionStorage() ?? [];
 function mostrarCarrito(array) {
   let carritoLista = document.querySelector(".carritoContainer");
   let htmlCarrito = "";
+  if (!carrito.length) htmlCarrito = "<p>No hay productos en el carrito</p>";
   for (let i = 0; i < array.length; i++) {
     htmlCarrito += `
               <li class="cardProductos">
