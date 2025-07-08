@@ -20,7 +20,7 @@ let carrito = recuperarProductosCarritoSessionStorage() ?? [];
 
 async function obtenerDatosProductos() {
   try {
-    let respuesta = await fetch(`http://localhost:3000/api/products`);
+    let respuesta = await fetch(`https://tpintegradorbackgrupo6-production.up.railway.app/api/products`);
     if (!respuesta.ok) {
       throw new Error("Error al obtener los productos");
     }

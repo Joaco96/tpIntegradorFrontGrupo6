@@ -23,7 +23,7 @@ function mostrarProductosTicket(venta) {
 
 async function obtenerDatosVenta(id) {
   try {
-    let respuesta = await fetch(`http://localhost:3000/api/sales/${id}`);
+    let respuesta = await fetch(`https://tpintegradorbackgrupo6-production.up.railway.app/api/sales/${id}`);
     if (!respuesta.ok) {
       throw new Error("Error al obtener los productos de la venta");
     }

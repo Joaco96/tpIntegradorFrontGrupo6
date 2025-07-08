@@ -96,7 +96,7 @@ function calcularTotal(array) {
 
 async function realizarCompra(body) {
   try {
-    let respuesta = await fetch(`http://localhost:3000/api/sales`, {
+    let respuesta = await fetch(`https://tpintegradorbackgrupo6-production.up.railway.app/api/sales`, {
       method: "post",
       body: JSON.stringify(body),
       headers: {
