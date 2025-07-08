@@ -1,4 +1,4 @@
-import {formatearNumero} from './utils/formatearNumero.js';
+import { formatearNumero } from "./utils/formatearNumero.js";
 
 function guardarProductosCarritoSessionStorage(carrito) {
   sessionStorage.setItem("carrito", JSON.stringify(carrito));
@@ -23,7 +23,9 @@ function mostrarCarrito(array) {
     htmlCarrito += `
               <li class="cardProductos">
                 <div class="cardProductosImgContainer">
-                  <img src=${array[i].image} alt=${array[i].name} class="cardProductosImg">
+                  <img src=${array[i].image} alt=${
+      array[i].name
+    } class="cardProductosImg">
                 </div>
                 <div class="cardProductosInfo">
                   <div class="cardProductosId">
@@ -43,13 +45,19 @@ function mostrarCarrito(array) {
                   <div class="cardProductosName">
                     <div class="cardProductosButtons">
                       <div class="buttons-container">
-                        <button onClick="${`eliminarCarrito(${array[i].id})`}">-</button>
+                        <button id="botonEliminarCarrito" data-id="${
+                          array[i].id
+                        }">-</button>
                         <span class="cantidad"> ${array[i].cantidad}</span>
-                        <button onClick="${`agregarCarrito(${array[i].id})`}">+</button>
+                        <button id="botonAgregarCarrito" data-id="${
+                          array[i].id
+                        }">+</button>
                       </div>                    
                     </div>
                     <h6 class="subtotal">
-                      Subtotal $${formatearNumero(array[i].price * array[i].cantidad)}
+                      Subtotal $${formatearNumero(
+                        array[i].price * array[i].cantidad
+                      )}
                     </h6>
                     </div>
                 </div>
@@ -62,7 +70,7 @@ function mostrarCarrito(array) {
 }
 
 function agregarCarrito(id) {
-  const productoAgregar = carrito.find((prodCarrito) => prodCarrito.id === id);
+  const productoAgregar = carrito.find((prodCarrito) => prodCarrito.id == id);
   productoAgregar.cantidad = productoAgregar.cantidad
     ? productoAgregar.cantidad + 1
     : 1;
@@ -72,10 +80,10 @@ function agregarCarrito(id) {
 }
 
 function eliminarCarrito(id) {
-  const productoEliminar = carrito.find((prodCarrito) => prodCarrito.id === id);
+  const productoEliminar = carrito.find((prodCarrito) => prodCarrito.id == id);
   productoEliminar.cantidad -= 1;
-  if (productoEliminar.cantidad === 0) {
-    carrito = carrito.filter((producto) => producto.id !== id);
+  if (productoEliminar.cantidad == 0) {
+    carrito = carrito.filter((producto) => producto.id != id);
   }
   mostrarCarrito(carrito);
   mostrarTotalesCarrito(carrito);
@@ -99,13 +107,16 @@ function calcularTotal(array) {
 
 async function realizarCompra(body) {
   try {
-    let respuesta = await fetch(`https://tpintegradorbackgrupo6-production.up.railway.app/api/sales`, {
-      method: "post",
-      body: JSON.stringify(body),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    let respuesta = await fetch(
+      `https://tpintegradorbackgrupo6-production.up.railway.app/api/sales`,
+      {
+        method: "post",
+        body: JSON.stringify(body),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     if (!respuesta.ok) {
       throw new Error("Error al crear la compra");
     }
@@ -149,7 +160,7 @@ const vaciarCarrito = () => {
   guardarProductosCarritoSessionStorage([]);
   carrito = [];
   mostrarCarrito(carrito);
-}
+};
 
 const botonConfirmarCompra = document.getElementById("botonConfirmarCompra");
 
@@ -166,6 +177,17 @@ const botonVaciarCarrito = document.getElementById("vaciar-carrito");
 
 botonVaciarCarrito.addEventListener("click", function () {
   vaciarCarrito();
+});
+
+// Con este selector, lo que tuvimos que hacer fue capturar el contenedor y chequear si existe primero el boton
+const carritoContainer = document.querySelector(".carritoContainer");
+
+carritoContainer.addEventListener("click", (e) => {
+  if (e.target.matches(`#botonAgregarCarrito`)) {
+    agregarCarrito(e.target.dataset.id);
+  } else if (e.target.matches(`#botonEliminarCarrito`)) {
+    eliminarCarrito(e.target.dataset.id);
+  }
 });
 
 function main() {

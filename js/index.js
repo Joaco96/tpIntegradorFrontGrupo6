@@ -1,4 +1,4 @@
-import {formatearNumero} from './utils/formatearNumero.js';
+import { formatearNumero } from "./utils/formatearNumero.js";
 
 function guardarProductosCarritoSessionStorage(carrito) {
   sessionStorage.setItem("carrito", JSON.stringify(carrito));
@@ -16,13 +16,15 @@ function recuperarProductosCarritoSessionStorage() {
 let productos;
 let filtros = {
   teclados: false,
-  mouses: false
+  mouses: false,
 };
 let carrito = recuperarProductosCarritoSessionStorage() ?? [];
 
 async function obtenerDatosProductos() {
   try {
-    let respuesta = await fetch(`https://tpintegradorbackgrupo6-production.up.railway.app/api/products`);
+    let respuesta = await fetch(
+      `https://tpintegradorbackgrupo6-production.up.railway.app/api/products`
+    );
     if (!respuesta.ok) {
       throw new Error("Error al obtener los productos");
     }
@@ -37,7 +39,7 @@ function mostrarProductos(productos) {
   let productosLista = document.querySelector(".productosContainer");
   if (!productos || productos.length === 0) {
     console.log("No hay productos disponibles.");
-    productosLista.innerHTML = "<p>No hay productos disponibles.</p>"
+    productosLista.innerHTML = "<p>No hay productos disponibles.</p>";
     return;
   }
   let htmlProductos = "";
@@ -68,9 +70,8 @@ function mostrarProductos(productos) {
                     ${
                       actualmenteEnCarrito
                         ? `<button disabled>Ya en carrito</button>`
-                        : `<button onClick="${`agregarCarrito(${producto.id})`}">Agregar al carrito</button>`
-                    }
-                    
+                        : `<button id="botonAgregarCarrito" data-id="${producto.id}">Agregar al carrito</button>`
+                    }                    
                   </div>
                 </div>
               </li>
@@ -98,11 +99,11 @@ function aplicarFiltros() {
 }
 
 function agregarCarrito(id) {
-  const productoAgregar = productos.find((producto) => producto.id === id);
+  const productoAgregar = productos.find((producto) => producto.id == id);
   productoAgregar.cantidad = productoAgregar.cantidad
     ? productoAgregar.cantidad + 1
     : 1;
-  const productoEnCarrito = carrito.find((producto) => producto.id === id);
+  const productoEnCarrito = carrito.find((producto) => producto.id == id);
   if (!productoEnCarrito) carrito.push(productoAgregar);
   aplicarFiltros();
   guardarProductosCarritoSessionStorage(carrito);
@@ -119,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Reiniciamos filtros y clases
       filtros = {
         teclados: false,
-        mouses: false
+        mouses: false,
       };
       botonesCategoria.forEach((b) => b.classList.remove("active"));
 
@@ -135,10 +136,19 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// Con este selector, lo que tuvimos que hacer fue capturar el contenedor y chequear si existe primero el boton
+const productosContainer = document.querySelector(".productosContainer");
+
+productosContainer.addEventListener("click", (e) => {
+  if (e.target.matches(`#botonAgregarCarrito`)) {
+    agregarCarrito(e.target.dataset.id);
+  }
+});
+
 async function main() {
   const loginData = sessionStorage.getItem("buyerName");
-  if(!loginData) return window.location.href = "/login.html";
-  
+  if (!loginData) return (window.location.href = "/login.html");
+
   let userNameContainer = document.querySelector("#userName");
   userNameContainer.innerHTML = JSON.parse(loginData);
 

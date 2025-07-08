@@ -263,17 +263,30 @@ div.login {
 }
 
 .ticketsButtonsContainer {
-  padding-inline: 20px;
+  padding: 20px;
   display: flex;
   gap: 16px;
   justify-content: end;
 }
 
 .totalVenta{
-  width: 100%;
   text-align: end;
-  padding-top: 20px;
   color: #FFB300;
+}
+
+.ventaTitle{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ventaTitle .ventaTitleFirst{
+  word-wrap: normal;
+}
+
+.ventaTitle .totalVenta{
+  display: flex;
+  justify-content: end;
 }
 
 .loginFormContainer {
