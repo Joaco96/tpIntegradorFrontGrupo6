@@ -77,7 +77,7 @@ async function exportarPedidoPDF(pedido) {
   doc.setTextColor(255, 0, 0);
   doc.text("Alumnos: Cortes Santiago, Cortes Joaquin", margenIzq, 280);
 
-  doc.save(`pedido-${pedido.id}.pdf`);
+  doc.save(`TECH SHOP-pedido-${pedido.id}.pdf`);
 }
 
 const downloadTicketButton = document.querySelector(".downloadTicketButton");
