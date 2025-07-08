@@ -1,3 +1,5 @@
+import {formatearNumero} from './utils/formatearNumero.js';
+
 let venta = null;
 
 function mostrarProductosTicket(venta) {
@@ -14,12 +16,12 @@ function mostrarProductosTicket(venta) {
     htmlItems += `<div class="itemsContainer">
         <span>- ${item.productName}</span>
         <span> ${item.quantity} un.</span>
-        <span> $ ${item.productPrice} x un. </span>
-        <span>Subtotal $${item.quantity * item.productPrice} </span>
+        <span> $ ${formatearNumero(item.productPrice)} x un. </span>
+        <span>Subtotal $${formatearNumero(item.quantity * item.productPrice)} </span>
       </div>`;
   });
   itemsContainer.innerHTML = htmlItems;
-  totalContainer.innerHTML = `Total: $${venta.total}`;
+  totalContainer.innerHTML = `Total: $${formatearNumero(venta.total)}`;
   titulo.innerHTML = `Ticket #${venta.id}`;
 }
 
@@ -60,7 +62,7 @@ async function exportarPedidoPDF(pedido) {
     y += 10;
     doc.setFontSize(11);
     doc.text(
-      `${item.quantity} x ${item.productName} - $${item.productPrice.toFixed(2)}`,
+      `${item.quantity} x ${item.productName} - $${formatearNumero(item.productPrice)}`,
       margenIzq,
       y - 2
     );
@@ -71,7 +73,7 @@ async function exportarPedidoPDF(pedido) {
   doc.setFontSize(12);
   doc.text("TOTAL", margenIzq, y);
   doc.line(margenIzq + 20, y + 2, margenDer, y + 2);
-  doc.text(`$${pedido.total.toFixed(2)}`, margenDer, y, { align: "right" });
+  doc.text(`$${formatearNumero(pedido.total)}`, margenDer, y, { align: "right" });
 
   doc.setFontSize(10);
   doc.setTextColor(255, 0, 0);

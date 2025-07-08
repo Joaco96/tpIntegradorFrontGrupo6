@@ -1,3 +1,5 @@
+import {formatearNumero} from './utils/formatearNumero.js';
+
 function guardarProductosCarritoSessionStorage(carrito) {
   sessionStorage.setItem("carrito", JSON.stringify(carrito));
 }
@@ -35,7 +37,7 @@ function mostrarCarrito(array) {
                       ${array[i].name}
                     </h4>
                     <h6>
-                      $${array[i].price}
+                      $${formatearNumero(array[i].price)}
                     </h6>                    
                   </div>
                   <div class="cardProductosName">
@@ -47,7 +49,7 @@ function mostrarCarrito(array) {
                       </div>                    
                     </div>
                     <h6 class="subtotal">
-                      Subtotal $${array[i].price * array[i].cantidad}
+                      Subtotal $${formatearNumero(array[i].price * array[i].cantidad)}
                     </h6>
                     </div>
                 </div>
@@ -83,7 +85,7 @@ function mostrarTotalesCarrito(array) {
   let contenedorTotalCarrito = document.querySelector("#precio-total");
   let contadorCarrito = document.getElementById("contador-carrito");
   let totalCarrito = calcularTotal(array);
-  contenedorTotalCarrito.innerHTML = `$ ${totalCarrito}`;
+  contenedorTotalCarrito.innerHTML = `$ ${formatearNumero(totalCarrito)}`;
   contadorCarrito.innerHTML = array.length;
 }
 

@@ -1,3 +1,5 @@
+import {formatearNumero} from './utils/formatearNumero.js';
+
 function guardarProductosCarritoSessionStorage(carrito) {
   sessionStorage.setItem("carrito", JSON.stringify(carrito));
 }
@@ -60,7 +62,7 @@ function mostrarProductos(productos) {
                     ${producto.name}
                   </h4>
                   <h6>
-                    $${producto.price}
+                    $${formatearNumero(producto.price)}
                   </h6>
                   <div class="cardProductosButtons">
                     ${
