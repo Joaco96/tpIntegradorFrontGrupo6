@@ -22,7 +22,7 @@ function mostrarProductosTicket(venta) {
   });
   itemsContainer.innerHTML = htmlItems;
   totalContainer.innerHTML = `Total: $${formatearNumero(venta.total)}`;
-  titulo.innerHTML = `Ticket #${venta.id} - ${new Date(venta.date).toLocaleDateString()}`;
+  titulo.innerHTML = `Ticket #${venta.id} - ${new Date(venta.date).toLocaleDateString("en-GB")}`;
 }
 
 async function obtenerDatosVenta(id) {
@@ -57,7 +57,7 @@ async function exportarPedidoPDF(pedido) {
   doc.text(`Orden N°${pedido.id}`, margenDer, y + 10, { align: "right" });
 
   doc.setFontSize(12);
-  doc.text(`Fecha: ${new Date(pedido.date).toLocaleDateString()}`, margenIzq, y + 10, { align: "left" });
+  doc.text(`Fecha: ${new Date(pedido.date).toLocaleDateString("en-GB")}`, margenIzq, y + 10, { align: "left" });
   y += 15;
 
   pedido.items.forEach((item) => {
