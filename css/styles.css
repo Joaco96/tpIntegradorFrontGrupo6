@@ -262,6 +262,13 @@ div.login {
   cursor: pointer;
 }
 
+.downloadTicketButton:hover {
+  background-color: #ffb300;
+  color: #212121;
+  border: 1px solid #ffb300;
+  cursor: pointer;
+}
+
 .ticketsButtonsContainer {
   padding: 20px;
   display: flex;
