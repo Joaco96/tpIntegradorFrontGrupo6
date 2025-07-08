@@ -405,4 +405,9 @@ div.login {
   .linksContainer {
     gap: 36px;
   }
+
+  .titleContainer {
+    flex-direction: column;
+    align-items: start;
+  }
 }
